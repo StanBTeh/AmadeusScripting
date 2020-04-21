@@ -1,0 +1,35 @@
+{
+  "/service/repo/powerbaseaws/*": {
+    "dev_target": "https://internal-dev-non-pci-int-lb-1435393786.us-west-2.elb.amazonaws.com",
+    "target": "https://internal-test-non-pci-int-lb-654675869.us-west-2.elb.amazonaws.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQb3dlcmJhc2UgQVBJIFRlc3QiLCJleHAiOjM3MzM4ODgwMTcsIm5hbWUiOiJmcmFuY2lyIiwicm9sZSI6IkFkbWluIn0.O8iskIN869jpwOzshS6-aCOWGX83N08kwSnAS5w1-z8"
+    },
+    "pathRewrite": {
+      "^/service/repo/powerbaseaws": "/powerbase-api"
+    }
+  },
+  "/service/ap/remarks-manager/*": {
+    "dev_target": "https://internal-dev-non-pci-int-lb-1435393786.us-west-2.elb.amazonaws.com",
+    "target": "https://internal-test-non-pci-int-lb-654675869.us-west-2.elb.amazonaws.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/service/ap/remarks-manager/api": "/remarks-manager-rest/api"
+    }
+  },
+  "/service/cbt-splunk-service/api/splunk/*": {
+    "dev_target": "https://internal-dev-non-pci-int-lb-1435393786.us-west-2.elb.amazonaws.com",
+    "target": "https://internal-test-non-pci-int-lb-654675869.us-west-2.elb.amazonaws.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/service/cbt-splunk-service/api/splunk": "/splunk-service-rest/api/splunk"
+    }
+  }
+}

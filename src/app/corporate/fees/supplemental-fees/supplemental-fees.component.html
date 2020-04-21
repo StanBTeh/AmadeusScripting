@@ -1,0 +1,100 @@
+<div [formGroup]="ticketedForm" class="form-group" style="margin-top:10px;padding-left: 10px">
+  <!-- <div class="row" style="border-bottom: 1px solid gray;margin-bottom: 2px;">
+    <div class="col-2">Schedule Changed?</div>
+    <div class="col-2">Ticketed Segment</div>
+    <div class="col-2">Fee</div>
+    <div class="col-2">Supplemental Fee</div>
+    <div class="">&nbsp;&nbsp;&nbsp;</div>
+    <div class="col-3">No Fee Code</div>
+  </div> -->
+
+  <table class="feeTable" *ngIf="this.ticketedForm.get('segments')['controls'].length > 0">
+    <tr>
+      <th width="50px" *ngIf="isExchange"><div class="">Schedule Change?</div></th>
+      <!-- <th width="50px"><div class="">Ticketed Segment</div></th> -->
+      <!-- <th width="100px" colspan="2"><div style="text-align: center">Fee</div></th> -->
+      <th width="100px" *ngIf="isGreaterThanZero"><div style="text-align: left">Fee</div></th>
+      <th width="150px" colspan="2"><div class="" style="text-align: left">Supplemental Fee</div></th>
+      <!-- <th width="100px"><div class=""></div></th> -->
+      <!-- <th width="70px"><div class=""></div></th> -->
+      <th width="150px" *ngIf="isAquaFee == false"><div class="cl">No Fee Code</div></th>
+    </tr>
+
+    <tbody formArrayName="segments" *ngFor="let item of this.ticketedForm.get('segments')['controls']; let i = index">
+      <tr [formGroupName]="i">
+        <td widhth="50px" *ngIf="item.get('isExchange').value">
+          <div *ngIf="item.get('isExchange').value">
+            <input
+              type="checkbox"
+              name="isChange"
+              formControlName="isChange"
+              id="isChange"
+              (change)="processExchange(item, $event.target.checked)"
+            />
+          </div>
+        </td>
+
+        <!-- <td width="50px">
+          <input type="text" class="form-control" name="segment" formControlName="segment" id="segment" readonly />
+        </td> -->
+
+        <td width="50px" *ngIf="false">
+          <input type="text" class="form-control" formControlName="code" name="code" id="code" readonly (change)="feeChange(item)" />
+        </td>
+        <td width="100px" *ngIf="isGreaterThanZero">
+          <input type="text" class="form-control" formControlName="fee" name="fee" id="fee" (change)="feeChange(item)" AmountMask />
+        </td>
+
+        <td width="150px">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="supplementalFee"
+            name="supplementalFee"
+            id="supplementalFee"
+            readonly
+            (change)="feeChange(item)"
+          />
+        </td>
+        <td width="100px">
+          <div (click)="addSupplementalFee(item)">
+            <i class="fas fa-plus-circle {{ !supplementalFeeList || supplementalFeeList.length === 0 ? 'disabled' : '' }}" id="add"></i>
+            Add Sup Fee
+          </div>
+        </td>
+
+        <td width="150px" *ngIf="isAquaFee == false">
+          <select
+            class="form-control "
+            id="noFeeCode"
+            formControlName="noFeeCode"
+            name="noFeeCode"
+            (change)="noFeeChange(item, $event.target.value)"
+          >
+            <option value=""></option>
+            <option *ngFor="let item of noFeeCodes" [value]="item.itemValue">
+              {{ item.itemText }}
+            </option>
+          </select>
+        </td>
+        <td *ngIf="i == this.ticketedForm.get('segments')['controls'].length - 1 && i < maxCount - 1 && isAquaFee == false">
+          <div (click)="addFee()">
+            <i class="fas fa-plus-circle " id="addFee"></i>
+            Add Fee
+          </div>
+        </td>
+        <td *ngIf="i > 0 && isAquaFee == false">
+          <div (click)="removeFee(i)">
+            <i class="fas fa-minus-circle" id="removeFee"> </i>
+            Remove Fee
+          </div>
+        </td>
+        <input type="hidden" class="form-control" formControlName="feeType" name="feeType" id="feeType" />
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <div *ngIf="this.ticketedForm.get('segments')['controls'].length == 0">
+  Fees not applicable to this PNR.
+</div> -->

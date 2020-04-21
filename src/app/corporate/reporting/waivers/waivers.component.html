@@ -1,0 +1,31 @@
+<form [formGroup]="ticketedForm">
+  <div class="documentContainer">
+    <div>
+      <div>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">
+              <!-- <input formControlName="documentation" type="text" class="form-control" maxlength="55"
+                style="width:98%" /> -->
+              <input type="text" class="form-control" formControlName="waiver" name="waiver" id="waiver" readonly />
+            </td>
+
+            <td style="width:10%" class="docTable">
+              <div (click)="addWaivers()">
+                <i class="fas fa-plus-circle" id="add"></i>
+                Add Waiver
+              </div>
+            </td>
+
+            <td style="width:12%" class="docTable">
+              <div (click)="removeWaivers()">
+                <i class="fas fa-minus-circle" id="remove"></i>
+                Remove Waiver
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

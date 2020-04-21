@@ -1,0 +1,30 @@
+<tabset id="reportingTab">
+  <tab heading="Reporting Remarks" id="reportingRemarksTab" tabOrder="1">
+    <app-reporting-remarks></app-reporting-remarks>
+  </tab>
+  <tab heading="BSP Reporting" id="bspReportingTab" *ngIf="hasTst" tabOrder="2">
+    <app-reporting-bsp></app-reporting-bsp>
+  </tab>
+  <tab heading="NON BSP Reporting" id="bspNonReportingTab" tabOrder="3">
+    <app-reporting-nonbsp></app-reporting-nonbsp>
+  </tab>
+  <tab heading="Matrix Reporting" id="bspNonReportingTab" tabOrder="4">
+    <app-matrix-reporting></app-matrix-reporting>
+  </tab>
+
+  <tab heading="Waivers / Favors" id="waiverFavorsTab" tabOrder="5">
+    <app-waivers></app-waivers>
+  </tab>
+  <tab heading="Hotel Savings Code" id="hotelSegmentsTab" tabOrder="6" *ngIf="showHotelsTab">
+    <app-hotel-segments></app-hotel-segments>
+  </tab>
+  <tab heading="Car Savings Code" id="carSavingsCode" tabOrder="7" *ngIf="showCarSavingsTab">
+    <app-car-savings-code></app-car-savings-code>
+  </tab>
+  <tab heading="No Hotel Booked" id="noHotelBook" tabOrder="8" *ngIf="showNoHotelBooked">
+    <app-no-booked-hotel></app-no-booked-hotel>
+  </tab>
+  <tab heading="UDID" id="rules" tabOrder="9" *ngIf="hasRules">
+    <app-container [containerFilter]="'REPORTING'"></app-container>
+  </tab>
+</tabset>
